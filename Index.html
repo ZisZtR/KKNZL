@@ -13,9 +13,45 @@
         <div id="cabinetSection"></div>
         <div id="orderSection">
             <h1>Order here</h1>
-            <div class="border"></div>
+            <div class="border">
+                <form>
+                    <label for="Med1" class="OrderText">Med1: </label>
+                    <input type="number" id="M1" class="inputMed">
+                    <br><br>
+                    <label for="Med2" class="OrderText">Med2: </label>
+                    <input type="number" id="Med2" class="inputMed">
+                </form>
+            </div>
         </div>
-        <div id="deliverSection"></div>
+        <div id="deliverSection">
+            <h1>On Delivering</h1>
+            <div class="border" id="deliverList">
+                <div class="deliverItem" id="item0">
+                    <h2>Order ID : xxxx</h2>
+                    <h2>Medicine List</h2>
+                    <h3><pre>       Med 1 : 1/1</pre></h3>
+                    <h3><pre>       Med 2 : 2/3</pre></h3>
+                </div>
+                <div class="deliverItem" id="item1">
+                    <h2>Order ID : yyyy</h2>
+                    <h2>Medicine List</h2>
+                    <h3><pre>       Med 1 : 0/0</pre></h3>
+                    <h3><pre>       Med 2 : 0/1</pre></h3>
+                </div>
+                <div class="deliverItem" id="item2">
+                    <h2>Order ID : zzzz</h2>
+                    <h2>Medicine List</h2>
+                    <h3><pre>       Med 1 : 0/5</pre></h3>
+                    <h3><pre>       Med 2 : 0/1</pre></h3>
+                </div>
+                <div class="deliverItem" id="item0">
+                    <h2>Order ID : aaaa</h2>
+                    <h2>Medicine List</h2>
+                    <h3><pre>       Med 1 : 0/1</pre></h3>
+                    <h3><pre>       Med 2 : 0/3</pre></h3>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
