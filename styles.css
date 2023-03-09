@@ -62,6 +62,7 @@ b{
     height: fit-content;
     border: none;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 #deliverSection{

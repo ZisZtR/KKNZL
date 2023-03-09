@@ -23,6 +23,45 @@ function addItemOrder(num){
     // <input type="number" id="M1" class="inputMed"></input>
 }
 
+async function addOrdering(){
+    // console.log("it's work tho")
+
+    const order_count = document.getElementsByClassName("OrderText").length
+    let txt = {}
+    for(let i=1;i<order_count+1;i++){
+        var tmp = document.getElementById(`M${i}`).value
+        document.getElementById(`M${i}`).value = ''
+        if(tmp==='') tmp=0
+        txt[`${i}`] = parseInt(`${tmp}`)
+    }
+
+    const obj = { "order" : txt}
+
+    console.log(obj)
+
+    // const response = await fetch('', {
+    //     method: 'POST',
+    //     body: JSON.stringify( {obj} ),
+    //     header: {
+    //        'Content-Type' : 'application/json'
+    //     }
+    // }
+    // )
+
+
+}
+
+{/* <div class="itemInfo">
+    <b>1</b>
+    <div class="deliverItem" id="item0">
+        <h2>Order ID : xxxx</h2>
+        <h2>Medicine List</h2>
+        <h3><pre>   Med 1 : 1/1</pre></h3>
+        <h3><pre>   Med 2 : 2/3</pre></h3>
+    </div>
+</div> */}
+
+
 async function getData(){
     const response = await fetch('')
     const _data = await response.json()
