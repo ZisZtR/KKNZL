@@ -6,6 +6,10 @@ pre{
     font-family: 'Times New Roman', Times, serif;
 }
 
+b{
+    color: white;
+}
+
 #page{
     align-items: center;
     width: 100vw;
@@ -32,6 +36,10 @@ pre{
     padding: 20px;
 }
 
+.itemInfo{
+    text-align: center;
+}
+
 .OrderText{
     color: white;
     font-size: larger;
@@ -39,6 +47,21 @@ pre{
 
 .inputMed{
     border: none;
+}
+
+#addOrder{
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#buttonOrder{
+    padding: 10px 20px;
+    background-color: #0094FF;
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    border: none;
+    border-radius: 8px;
 }
 
 #deliverSection{
@@ -51,12 +74,14 @@ pre{
     flex-direction: row;
     align-items: space-evenly;
     flex-wrap: wrap;
+    max-width: 70vw;
+    width: fit-content;
 }
 
 .deliverItem{
     height: fit-content;
     width: auto;
-    padding: 0 20px;
+    padding: 20px;
     margin: 10px;
     background-color: white;
     border-radius: 10px;
