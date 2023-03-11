@@ -10,7 +10,7 @@ function addItemOrder(num){
     const label_tmp = document.createElement('label')
     label_tmp.setAttribute("for", `Med${num}`)
     label_tmp.classList.add("OrderText") 
-    label_tmp.innerHTML = `Med${num}: `
+    label_tmp.innerHTML = `Med${num} : `
     tmp.appendChild(label_tmp)
 
     const input_tmp = document.createElement('input')

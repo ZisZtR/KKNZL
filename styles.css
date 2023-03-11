@@ -16,9 +16,47 @@ b{
 }
 
 #cabinetSection{
-    background-color: blue;
-    width: 100px;
-    height: 100px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.cabinetItem{
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    align-items: center;
+    height: fit-content;
+    width: fit-content;
+    padding: 10px 30px;
+}
+
+ .cabText{
+    font-size: xx-large;
+    color: white;
+    margin: 0;
+}
+
+.subText{
+    font-size: x-large;
+}
+
+.statusBox{
+    width: 130px;
+    height: 180px;
+    background-color: #D9D9D9;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.statusLevel{
+    width: 85%;
+    height: 25%;
+    background-color: white;
 }
 
 #orderSection{
@@ -73,7 +111,7 @@ b{
 #deliverList{
     display: flex;
     flex-direction: row;
-    align-items: space-evenly;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     max-width: 70vw;
     width: fit-content;
