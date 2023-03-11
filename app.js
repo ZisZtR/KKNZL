@@ -1,3 +1,38 @@
+async function getData(){
+    const response1 = await fetch('/cabinet', {
+        method: 'GET',
+		headers: {
+            'Content-Type': "application/json",
+        }
+    })
+    const _data1 = await response1.json()
+    const result1 = await response1.status()
+    if(!result1) throw new Error("Could not get status")
+
+    const response2 = await fetch('/order', {
+        method: 'GET',
+		headers: {
+            'Content-Type': "application/json",
+        }
+    })
+    const _data2 = await response2.json()
+    const result2 = await response2.status()
+    if(!result2) throw new Error("Could not get status")
+    else return {_data1, _data2}
+}
+
+async function postData(data){
+    const response = await fetch('/order/submit', {
+        method: 'POST',
+		headers: {
+            'Content-Type': "application/json",
+        },
+        body: data
+    })
+    const result = await response.status()
+    if(!result) throw new Error("Could not get status")
+}
+
 function addCabinet(num){
     // <div class="cabinetItem" id="cab1">
     //     <p class="cabText"><b>Cabinet 1</b></p>
@@ -107,14 +142,7 @@ async function addOrdering(){
 
     console.log(obj)
 
-    // const response = await fetch('', {
-    //     method: 'POST',
-    //     body: JSON.stringify( {obj} ),
-    //     header: {
-    //        'Content-Type' : 'application/json'
-    //     }
-    // }
-    // )
+    //postData(obj)
 
 
 }
@@ -166,31 +194,6 @@ function addDeliverOrder(num, orderID, orderList){
     document.getElementById('deliverList').appendChild(tmp)
 }
 
-async function getData(){
-    const response = await fetch('', {
-        method: 'GET',
-		headers: {
-            'Content-Type': "application/json",
-        }
-    })
-    const _data = await response.json()
-    const result = await response.status()
-    if(!result) throw new Error("Could not get status")
-    else return _data
-}
-
-async function postData(data){
-    const response = await fetch('', {
-        method: 'POST',
-		headers: {
-            'Content-Type': "application/json",
-        },
-        body: data
-    })
-    const result = await response.status()
-    if(!result) throw new Error("Could not get status")
-}
-
 // ;(async ()=> {
 //     // const cabList = await getData()
 //     console.log('start')
@@ -198,6 +201,8 @@ async function postData(data){
 
 
 const deliverTMP = [ { orderID : 'xxxx', list : { "1" : 1, "2" : 3 } }, { orderID : 'yyyy', list : { "1" : 0, "2" : 1 } }, { orderID : 'zzzz', list : { "1" : 5, "2" : 1 } }, { orderID : 'aaaa', list : { "1" : 1, "2" : 3 } } ]
+
+// setInterval(getData(), 2000)
 
 addCabinet(4)
 changeCabStatus(0, 'full')
