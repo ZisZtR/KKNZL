@@ -1,43 +1,40 @@
-async function getData(){
-    const response1 = await fetch('/cabinet', {
-        method: 'GET',
+const url = 'http://10.4.199.53:5000/'
+
+const getData = async (link)=>{
+	return fetch(url+link,{
+		method: 'GET',
+		mode: 'cors',
 		headers: {
             'Content-Type': "application/json",
         }
-    })
-    const _data1 = await response1.json()
-    console.log(_data1)
-
-    // const result1 = await response1.status()
-    // console.log(result1)
-    // if(!result1) throw new Error("Could not get status")
-
-    const response2 = await fetch('/order', {
-        method: 'GET',
-		headers: {
-            'Content-Type': "application/json",
-        }
-    })
-    const _data2 = await response2.json()
-    console.log(_data2)
-    // const result2 = await response2.status()
-    // console.log(result2)
-    // if(!result2) throw new Error("Could not get status")
-    // else return [_data1['cabinets'], _data2]
-    return [_data1['cabinets'], _data2['order']]
+	})
+	.then((result)=>{
+		return result.json();
+	})
+	.then((res)=>{
+		if(!res.status) throw new Error("Could not get status")
+		if(res.status == "success") return res
+		throw new Error(res.message)
+	})
 }
 
-async function postData(data){
-    const response = await fetch('/order/submit', {
-        method: 'POST',
+const postData = async (data)=>{
+	return fetch(url+'order/submit', {
+		method: 'POST',
+		mode: 'cors',
 		headers: {
             'Content-Type': "application/json",
         },
-        body: data
-    })
-    const result = await response.status()
-    console.log(result)
-    if(!result) throw new Error("Could not get status")
+		body: JSON.stringify(data)
+	})
+	.then((res)=>{
+		return res.json();
+	})
+	.then((res)=>{
+		if(!res.status) throw new Error("Could not get status")
+		if(res.status == "success") return res
+		throw new Error(res.message)
+	})
 }
 
 function addCabinet(num){
@@ -52,20 +49,21 @@ function addCabinet(num){
     //     </div>
     //     <p class="cabText subText">Status : Full</p>
     // </div>
-    for(let i=0;i<num;i++){
+    let count = document.getElementById("cabinetSection").childElementCount;
+    for(let i=0;i<num-count;i++){
         const tmp = document.createElement('div')
         tmp.classList.add("cabinetItem")
-        tmp.id = `cab${i}`
+        tmp.id = `cab${i+count}`
 
         let text = document.createElement('p')
         text.classList.add('cabText')
-        text.innerHTML = `<b>Cabinet ${i+1}</b>`
+        text.innerHTML = `<b>Cabinet ${i+1+count}</b>`
         tmp.appendChild(text)
 
         text = document.createElement('p')
         text.classList.add('cabText')
         text.classList.add('subText')
-        text.innerHTML = `Med ${i+1}`
+        text.innerHTML = `Med ${i+1+count}`
         tmp.appendChild(text)
 
         tmp.appendChild(document.createElement('br'))
@@ -75,7 +73,7 @@ function addCabinet(num){
         for(let j=0;j<3;j++){
             let box = document.createElement('div')
             box.classList.add('statusLevel')
-            box.id = `lv_${j}`
+            box.classList.add(`lv_${j}`)
             subTmp.appendChild(box)
         }
         tmp.appendChild(subTmp)
@@ -104,7 +102,7 @@ function changeCabStatus(num, status){
     else if(status==='low') sel=2
     else sel=3
     for(let i=0;i<3;i++){
-        tmp.querySelector(`#lv_${i}`).style.backgroundColor = color[sel][i]
+        tmp.querySelector(`.lv_${i}`).style.backgroundColor = color[sel][i]
     }
 }
 
@@ -147,9 +145,9 @@ async function addOrdering(){
 
     const obj = { "order" : txt}
 
-    console.log(obj)
+    // console.log(obj)
 
-    //postData(obj)
+    postData(obj)
 
 
 }
@@ -195,13 +193,14 @@ function addDeliverOrder(num, orderID, orderList){
     document.getElementById('deliverList').appendChild(tmp)
 }
 
-// ;(async ()=> {
-//     // const cabList = await getData()
-//     console.log('start')
-// })
+async function data_manage(){
+    let tmp1 = await getData('cabinet')
+    const cab = tmp1['cabinets']
+    // console.log(cab)
 
-function data_manage(){
-    const [cab, ord] = getData()
+    const tmp2 = await getData('order')
+    const ord = tmp2[['order']]
+    // console.log(ord)
 
     //cabinet
     addCabinet(cab.length)
@@ -210,24 +209,28 @@ function data_manage(){
     }
 
     //order
+    const node = document.getElementById("deliverList")
+    while (node.firstChild) {
+        node.removeChild(node.firstChild);
+    }
     let count=0
     for(const key in ord){
-        count+=1
         addDeliverOrder(count, key, ord[key])
+        count+=1
     }
 }
 
-const deliverTMP = [ { orderID : 'xxxx', list : { "1" : 1, "2" : 3 } }, { orderID : 'yyyy', list : { "1" : 0, "2" : 1 } }, { orderID : 'zzzz', list : { "1" : 5, "2" : 1 } }, { orderID : 'aaaa', list : { "1" : 1, "2" : 3 } } ]
+// const deliverTMP = [ { orderID : 'xxxx', list : { "1" : 1, "2" : 3 } }, { orderID : 'yyyy', list : { "1" : 0, "2" : 1 } }, { orderID : 'zzzz', list : { "1" : 5, "2" : 1 } }, { orderID : 'aaaa', list : { "1" : 1, "2" : 3 } } ]
+data_manage()
+setInterval(data_manage, 5000)
 
-// setInterval(data_manage(), 1000)
+// addCabinet(4)
+// changeCabStatus(0, 'full')
+// changeCabStatus(1, 'half')
+// changeCabStatus(2, 'low')
+// changeCabStatus(3, 'empty')
 
-addCabinet(4)
-changeCabStatus(0, 'full')
-changeCabStatus(1, 'half')
-changeCabStatus(2, 'low')
-changeCabStatus(3, 'empty')
-
-for(let i=0;i<deliverTMP.length;i++){
-    // console.log(deliverTMP[i])
-    addDeliverOrder(i, deliverTMP[i]['orderID'], deliverTMP[i]['list'])
-}
+// for(let i=0;i<deliverTMP.length;i++){
+//     // console.log(deliverTMP[i])
+//     addDeliverOrder(i, deliverTMP[i]['orderID'], deliverTMP[i]['list'])
+// }
