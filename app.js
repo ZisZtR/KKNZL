@@ -1,3 +1,69 @@
+function addCabinet(num){
+    // <div class="cabinetItem" id="cab1">
+    //     <p class="cabText"><b>Cabinet 1</b></p>
+    //     <p class="cabText subText">Med 1</p>
+    //     <br>
+    //     <div class="statusBox">
+    //         <div class="statusLevel" id="lv_0"></div>
+    //         <div class="statusLevel" id="lv_1"></div>
+    //         <div class="statusLevel" id="lv_2"></div>
+    //     </div>
+    //     <p class="cabText subText">Status : Full</p>
+    // </div>
+    for(let i=0;i<num;i++){
+        const tmp = document.createElement('div')
+        tmp.classList.add("cabinetItem")
+        tmp.id = `cab${i}`
+
+        let text = document.createElement('p')
+        text.classList.add('cabText')
+        text.innerHTML = `<b>Cabinet ${i+1}</b>`
+        tmp.appendChild(text)
+
+        text = document.createElement('p')
+        text.classList.add('cabText')
+        text.classList.add('subText')
+        text.innerHTML = `Med ${i+1}`
+        tmp.appendChild(text)
+
+        tmp.appendChild(document.createElement('br'))
+
+        const subTmp = document.createElement('div')
+        subTmp.classList.add('statusBox')
+        for(let j=0;j<3;j++){
+            let box = document.createElement('div')
+            box.classList.add('statusLevel')
+            box.id = `lv_${j}`
+            subTmp.appendChild(box)
+        }
+        tmp.appendChild(subTmp)
+
+        text = document.createElement('p')
+        text.classList.add('cabText')
+        text.classList.add('subText')
+        text.classList.add('statusTxt')
+        text.innerHTML = 'Status : N/A'
+        tmp.appendChild(text)
+
+        document.getElementById('cabinetSection').appendChild(tmp)
+    }
+}
+
+function changeCabStatus(num, status){
+    const color = [['#3EEE00', '#3EEE00', '#3EEE00'], ['white', '#EBED6F', '#EBED6F'], ['white', 'white', '#F10D0D'], ['white', 'white', 'white']] //full half, low, empty
+    let sel = 3
+    
+    const tmp = document.getElementById(`cab${num}`)
+    tmp.querySelector('.statusTxt').innerHTML = `Status : ${status}`
+    if(status==='full') sel=0
+    else if(status==='half') sel=1
+    else if(status==='low') sel=2
+    else sel=3
+    for(let i=0;i<3;i++){
+        tmp.querySelector(`#lv_${i}`).style.backgroundColor = color[sel][i]
+    }
+}
+
 function addItemOrder(num){
     const tmp = document.getElementById("input_form")
     if(tmp.childElementCount > 0){
@@ -111,6 +177,9 @@ async function getData(){
 
 const deliverTMP = [ { orderID : 'xxxx', list : { "1" : 1, "2" : 3 } }, { orderID : 'yyyy', list : { "1" : 0, "2" : 1 } }, { orderID : 'zzzz', list : { "1" : 5, "2" : 1 } }, { orderID : 'aaaa', list : { "1" : 1, "2" : 3 } } ]
 
+addCabinet(2)
+changeCabStatus(0, 'full')
+changeCabStatus(1, 'low')
 addItemOrder(1)
 addItemOrder(2)
 for(let i=0;i<deliverTMP.length;i++){

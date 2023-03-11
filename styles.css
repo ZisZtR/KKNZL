@@ -19,27 +19,30 @@ b{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .cabinetItem{
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     background-color: black;
     align-items: center;
     height: fit-content;
     width: fit-content;
-    padding: 10px 30px;
+    padding: 15px 30px;
+    margin: 0 30px;
 }
 
  .cabText{
     font-size: xx-large;
-    color: white;
+    color: #EBF6D9;
     margin: 0;
 }
 
 .subText{
     font-size: x-large;
+    color: white;
 }
 
 .statusBox{
