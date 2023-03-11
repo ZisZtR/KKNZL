@@ -6,8 +6,11 @@ async function getData(){
         }
     })
     const _data1 = await response1.json()
-    const result1 = await response1.status()
-    if(!result1) throw new Error("Could not get status")
+    console.log(_data1)
+
+    // const result1 = await response1.status()
+    // console.log(result1)
+    // if(!result1) throw new Error("Could not get status")
 
     const response2 = await fetch('/order', {
         method: 'GET',
@@ -16,9 +19,12 @@ async function getData(){
         }
     })
     const _data2 = await response2.json()
-    const result2 = await response2.status()
-    if(!result2) throw new Error("Could not get status")
-    else return {_data1, _data2}
+    console.log(_data2)
+    // const result2 = await response2.status()
+    // console.log(result2)
+    // if(!result2) throw new Error("Could not get status")
+    // else return [_data1['cabinets'], _data2]
+    return [_data1['cabinets'], _data2['order']]
 }
 
 async function postData(data){
@@ -30,6 +36,7 @@ async function postData(data){
         body: data
     })
     const result = await response.status()
+    console.log(result)
     if(!result) throw new Error("Could not get status")
 }
 
@@ -147,12 +154,6 @@ async function addOrdering(){
 
 }
 
-// GET /order_get/{n} n start at 0
-// orderList{
-//     "1" : 2,
-//     "2" : 3,
-//     "3" : 4
-// }
 function addDeliverOrder(num, orderID, orderList){
     // <div class="itemInfo">
     //     <b>1</b>
@@ -199,10 +200,26 @@ function addDeliverOrder(num, orderID, orderList){
 //     console.log('start')
 // })
 
+function data_manage(){
+    const [cab, ord] = getData()
+
+    //cabinet
+    addCabinet(cab.length)
+    for(let i=0;i<cab.length;i++){
+        changeCabStatus(i, cab[i])
+    }
+
+    //order
+    let count=0
+    for(const key in ord){
+        count+=1
+        addDeliverOrder(count, key, ord[key])
+    }
+}
 
 const deliverTMP = [ { orderID : 'xxxx', list : { "1" : 1, "2" : 3 } }, { orderID : 'yyyy', list : { "1" : 0, "2" : 1 } }, { orderID : 'zzzz', list : { "1" : 5, "2" : 1 } }, { orderID : 'aaaa', list : { "1" : 1, "2" : 3 } } ]
 
-// setInterval(getData(), 2000)
+// setInterval(data_manage(), 1000)
 
 addCabinet(4)
 changeCabStatus(0, 'full')
