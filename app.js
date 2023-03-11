@@ -167,14 +167,34 @@ function addDeliverOrder(num, orderID, orderList){
 }
 
 async function getData(){
-    const response = await fetch('')
+    const response = await fetch('', {
+        method: 'GET',
+		headers: {
+            'Content-Type': "application/json",
+        }
+    })
     const _data = await response.json()
-    return _data
+    const result = await response.status()
+    if(!result) throw new Error("Could not get status")
+    else return _data
 }
 
-;(async ()=> {
-    // const cabList = await getData()
-})
+async function postData(data){
+    const response = await fetch('', {
+        method: 'POST',
+		headers: {
+            'Content-Type': "application/json",
+        },
+        body: data
+    })
+    const result = await response.status()
+    if(!result) throw new Error("Could not get status")
+}
+
+// ;(async ()=> {
+//     // const cabList = await getData()
+//     console.log('start')
+// })
 
 
 const deliverTMP = [ { orderID : 'xxxx', list : { "1" : 1, "2" : 3 } }, { orderID : 'yyyy', list : { "1" : 0, "2" : 1 } }, { orderID : 'zzzz', list : { "1" : 5, "2" : 1 } }, { orderID : 'aaaa', list : { "1" : 1, "2" : 3 } } ]
