@@ -46,6 +46,8 @@ function addCabinet(num){
         tmp.appendChild(text)
 
         document.getElementById('cabinetSection').appendChild(tmp)
+
+        addItemOrder(i+1)
     }
 }
 
@@ -177,11 +179,12 @@ async function getData(){
 
 const deliverTMP = [ { orderID : 'xxxx', list : { "1" : 1, "2" : 3 } }, { orderID : 'yyyy', list : { "1" : 0, "2" : 1 } }, { orderID : 'zzzz', list : { "1" : 5, "2" : 1 } }, { orderID : 'aaaa', list : { "1" : 1, "2" : 3 } } ]
 
-addCabinet(2)
+addCabinet(4)
 changeCabStatus(0, 'full')
-changeCabStatus(1, 'low')
-addItemOrder(1)
-addItemOrder(2)
+changeCabStatus(1, 'half')
+changeCabStatus(2, 'low')
+changeCabStatus(3, 'empty')
+
 for(let i=0;i<deliverTMP.length;i++){
     // console.log(deliverTMP[i])
     addDeliverOrder(i, deliverTMP[i]['orderID'], deliverTMP[i]['list'])
