@@ -220,17 +220,17 @@ async function data_manage(){
     }
 }
 
-const deliverTMP = [ { orderID : 'xxxx', list : { "1" : 1, "2" : 3 } }, { orderID : 'yyyy', list : { "1" : 0, "2" : 1 } }, { orderID : 'zzzz', list : { "1" : 5, "2" : 1 } }, { orderID : 'aaaa', list : { "1" : 1, "2" : 3 } } ]
-// data_manage()
-// setInterval(data_manage, 5000)
+// const deliverTMP = [ { orderID : 'xxxx', list : { "1" : 1, "2" : 3 } }, { orderID : 'yyyy', list : { "1" : 0, "2" : 1 } }, { orderID : 'zzzz', list : { "1" : 5, "2" : 1 } }, { orderID : 'aaaa', list : { "1" : 1, "2" : 3 } } ]
+data_manage()
+setInterval(data_manage, 5000)
 
-addCabinet(4)
-changeCabStatus(0, 'full')
-changeCabStatus(1, 'half')
-changeCabStatus(2, 'low')
-changeCabStatus(3, 'empty')
+// addCabinet(4)
+// changeCabStatus(0, 'full')
+// changeCabStatus(1, 'half')
+// changeCabStatus(2, 'low')
+// changeCabStatus(3, 'empty')
 
-for(let i=0;i<deliverTMP.length;i++){
-    // console.log(deliverTMP[i])
-    addDeliverOrder(i, deliverTMP[i]['orderID'], deliverTMP[i]['list'])
-}
+// for(let i=0;i<deliverTMP.length;i++){
+//     // console.log(deliverTMP[i])
+//     addDeliverOrder(i, deliverTMP[i]['orderID'], deliverTMP[i]['list'])
+// }
