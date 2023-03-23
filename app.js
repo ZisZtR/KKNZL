@@ -184,7 +184,7 @@ function addDeliverOrder(num, orderID, orderList){
 
     for(let i=0;i<Object.keys(orderList).length;i++){
         let txt3 = document.createElement('h3')
-        txt3.innerHTML = `<pre>   Med ${i+1} : 0/${orderList[`${i+1}`]}</pre>`
+        txt3.innerHTML = `<pre>   Med ${i+1} : ${orderList[`${i+1}`]}</pre>`
         deliver.appendChild(txt3)
     }
 
